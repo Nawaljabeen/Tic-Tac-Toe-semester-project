@@ -138,4 +138,26 @@ bool isBoardFull() {
     return true;  // No empty space, board is full
 }
 
+void computers_move() {
+    int computers_row;
+    int computers_col;
+    srand(time(0));
+
+    if (user_choice == 'O')
+        computers_symbol = 'X';
+    else
+        computers_symbol = 'O';
+
+    bool occupied_cell = false;
+
+    while (!occupied_cell && !isBoardFull()) {
+        computers_row = rand() % 3;
+        computers_col = rand() % 3;
+        occupied_cell = makeMove(computers_row, computers_col, computers_symbol);
+    }
+
+    cout << "Computer's move: " << endl << endl;
+    displayGrid();
+    cout << endl << endl;
+}
 
