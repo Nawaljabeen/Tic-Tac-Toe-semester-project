@@ -41,6 +41,32 @@ int main() {
         cout << "It's a draw! The game is a tie." << endl;
     }
 
+
+void initialMenu() {
+    cout << "Welcome to Tic-Tac-Toe. Press 1 to choose 'O' or press 2 to choose 'X': ";
+    cin >> user_choice;
+
+    switch (user_choice) {
+        case '1': user_choice = 'O'; break;
+        case '2': user_choice = 'X'; break;
+    }
+
+    cout << "You get the first choice." << endl;
+    cout<<endl;
+}
+
+void displayGrid() {
+    
+    for (int i = 0; i < 3; i++) {
+        cout << "| ";
+        for (int j = 0; j < 3; j++) {
+            cout << board[i][j] << " | ";
+        }
+    if (i < 2)
+        cout << endl << "-------------" << endl;
+    cout<<endl;
+    }
+}
     return 0;
 }
 
