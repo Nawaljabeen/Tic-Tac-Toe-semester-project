@@ -69,6 +69,24 @@ void displayGrid() {
 }
     return 0;
 }
+bool makeMove(int row, int col, char symbol) {
+    if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ') {
+        return false;  // Invalid move
+    }
 
+    board[row][col] = symbol;
+    return true;
+}
+
+bool isBoardFull() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (board[i][j] == ' ') {
+                return false;  // Empty space found
+            }
+        }
+    }
+    return true;  // No empty space, board is full
+}
 
 
