@@ -72,6 +72,55 @@ void displayGrid() {
 bool makeMove(int row, int col, char symbol) {
     if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ') {
         return false;  // Invalid move
+        
+bool checkForWin() {
+    // Check rows and columns
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] == user_choice && board[i][1] == user_choice && board[i][2] == user_choice) {
+            winner_flag = '1';  
+            return true;  // Row win
+        }
+        if (board[0][i] == user_choice && board[1][i] == user_choice && board[2][i] == user_choice) {
+            winner_flag = '1';
+            return true;  // Column win
+        }
+    }
+
+    // Check diagonals
+    if (board[0][0] == user_choice && board[1][1] == user_choice && board[2][2] == user_choice) {
+        winner_flag = '1';
+        return true;  // Diagonal win
+    }
+    if (board[0][2] == user_choice && board[1][1] == user_choice && board[2][0] == user_choice) {
+        winner_flag = '1';
+        return true;  // Diagonal win
+    }
+
+    // Check for a win for the computer
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] == computers_symbol && board[i][1] == computers_symbol && board[i][2] == computers_symbol) {
+            winner_flag = '2';
+            return true;  // Row win for computer
+        }
+        if (board[0][i] == computers_symbol && board[1][i] == computers_symbol && board[2][i] == computers_symbol) {
+            winner_flag = '2';
+            return true;  // Column win for computer
+        }
+    }
+
+    // Check diagonals for the computer
+    if (board[0][0] == computers_symbol && board[1][1] == computers_symbol && board[2][2] == computers_symbol) {
+        winner_flag = '2';
+        return true;  // Diagonal win for computer
+    }
+    if (board[0][2] == computers_symbol && board[1][1] == computers_symbol && board[2][0] == computers_symbol) {
+        winner_flag = '2';
+        return true;  // Diagonal win for computer
+    }
+
+    return false;  // No win yet
+}
+
     }
 
     board[row][col] = symbol;
