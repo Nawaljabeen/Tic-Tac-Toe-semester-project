@@ -11,6 +11,15 @@ char user_choice;
 char winner_flag;
 char computers_symbol;
 
+void displayGrid();
+void initialMenu();
+bool makeMove(int row, int col, char symbol);
+bool isBoardFull();
+void checkForWin();
+void computers_move();
+
+
+
 int main() {
     initialMenu();
     int row, col;
