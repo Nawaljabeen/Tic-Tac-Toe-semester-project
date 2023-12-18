@@ -81,7 +81,7 @@ void initialMenu() {
     }
 
     cout << "You get the first choice." << endl;
-    cout<<endl;
+    cout << endl;
 }
 
 void  displayGrid() {
