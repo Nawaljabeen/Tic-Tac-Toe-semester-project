@@ -6,25 +6,39 @@ Tic tac toe game against computer.
 #include <ctime>
 using namespace std;
 
-char board[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}}; //outer loop for rows, inner for elements in each row
+char board[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 char user_choice;
 char winner_flag;
 char computers_symbol;
 
+// Function prototypes
 void displayGrid();
 void initialMenu();
 bool makeMove(int row, int col, char symbol);
 bool isBoardFull();
-void checkForWin();
+bool checkForWin();
 void computers_move();
+void resetBoard();
 
+int main()
+ {
 
+cout<<"      _______  ___   _______    _______  _______  _______    _______  _______  _______ " <<endl;
+cout<<"     |       ||   | |       |  |       ||   _   ||       |  |       ||       ||       |"<<endl;
+cout<<"     |_     _||   | |       |  |_     _||  |_|  ||       |  |_     _||   _   ||    ___|"<<endl;
+cout<<"       |   |  |   | |       |    |   |  |       ||       |    |   |  |  | |  ||   |___ "<<endl;
+cout<<"       |   |  |   | |      _|    |   |  |       ||      _|    |   |  |  |_|  ||    ___|"<<endl;
+cout<<"       |   |  |   | |     |_     |   |  |   _   ||     |_     |   |  |       ||   |___ "<<endl;
+cout<<"       |___|  |___| |_______|    |___|  |__| |__||_______|    |___|  |_______||_______|"<<endl << endl;
 
-int main() {
+ 	char playAgain;
+do{	 
+    resetBoard();
     initialMenu();
     int row, col;
 
-    while (!isBoardFull() && !checkForWin()) {
+    while(!isBoardFull() && !checkForWin()) {
+        
         cout << "Enter your move (row and column): ";
         cin >> row >> col;
         cout<<endl;
@@ -49,10 +63,16 @@ int main() {
     else {
         cout << "It's a draw! The game is a tie." << endl;
     }
+cout << "Do you want to play again? (Y/N): ";
+cin >> playAgain;
+}while(playAgain == 'Y' || playAgain == 'y');
 
+return 0;
+}
 
 void initialMenu() {
-    cout << "Welcome to Tic-Tac-Toe. Press 1 to choose 'O' or press 2 to choose 'X': ";
+    cout << "Welcome to Tic-Tac-Toe.";
+    cout<<"You'll be playing against a computer." <<endl<< "Press 1 to choose 'O' or press 2 to choose 'X': "<< endl;
     cin >> user_choice;
 
     switch (user_choice) {
@@ -64,7 +84,7 @@ void initialMenu() {
     cout<<endl;
 }
 
-void displayGrid() {
+void  displayGrid() {
     
     for (int i = 0; i < 3; i++) {
         cout << "| ";
@@ -76,17 +96,32 @@ void displayGrid() {
     cout<<endl;
     }
 }
-    return 0;
-}
+
 bool makeMove(int row, int col, char symbol) {
     if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != ' ') {
         return false;  // Invalid move
-        
+    }
+
+    board[row][col] = symbol;
+    return true;
+}
+
+bool isBoardFull() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (board[i][j] == ' ') {
+                return false;  // Empty space found
+            }
+        }
+    }
+    return true;  // No empty space, board is full
+}
+
 bool checkForWin() {
     // Check rows and columns
     for (int i = 0; i < 3; i++) {
         if (board[i][0] == user_choice && board[i][1] == user_choice && board[i][2] == user_choice) {
-            winner_flag = '1';  
+            winner_flag = '1';
             return true;  // Row win
         }
         if (board[0][i] == user_choice && board[1][i] == user_choice && board[2][i] == user_choice) {
@@ -130,22 +165,6 @@ bool checkForWin() {
     return false;  // No win yet
 }
 
-    }
-
-    board[row][col] = symbol;
-    return true;
-}
-
-bool isBoardFull() {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            if (board[i][j] == ' ') {
-                return false;  // Empty space found
-            }
-        }
-    }
-    return true;  // No empty space, board is full
-}
 
 void computers_move() {
     int computers_row;
@@ -168,5 +187,14 @@ void computers_move() {
     cout << "Computer's move: " << endl << endl;
     displayGrid();
     cout << endl << endl;
+
+
 }
 
+void resetBoard() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = ' ';
+        }
+    }
+}
